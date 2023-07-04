@@ -12,7 +12,7 @@
             <input
               v-shake
               type="text"
-              v-model="userLoginForm.username"
+              v-model="userLoginForm.email"
               placeholder="请输入账号"
             />
             <input
@@ -32,7 +32,7 @@
             <span v-html="error"></span>
           </div>
           <div id="btn">
-            <button class="loginbtn" @click="usreList">登陆</button>
+            <button class="loginbtn" @click="getUserInfo">登陆</button>
           </div>
         </el-card>
       </div>
@@ -40,30 +40,48 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { getCurrentInstance, reactive, ref } from "@vue/runtime-core";
+import { reactive, ref } from "@vue/runtime-core";
+import { login } from "../api/login";
 
 export default {
   name: "LoginView",
   setup() {
     let userLoginForm = reactive({
-      username: "",
+      email: "",
       password: "",
     });
     const store = useStore();
     const router = useRouter();
-    const { proxy } = getCurrentInstance();
     let error = ref("");
-    //获取用户登录信息
-    // async function usreList() {
-    // }
     // //获取用户信息
-    // async function getUserInfo() {}
+    let getUserInfo = async () => {
+      let res = await login(userLoginForm);
+      // if (res.status === 200) {
+      //   // store.commit("setAccessToken", res.data.access);
+      //   // store.commit("setRefreshToken", res.data.refresh);
+      //   // store.commit("updateLastRefreshTime");
+      //   // console.log("login refresh time", store.state.last_token_refresh_time);
+      //   // res = await proxy.$api.getAsideMenu({ group: userLoginForm.username });
+      //   // store.commit("updateMenus", JSON.parse(res.data[0].menus));
+      //   // store.commit("setMenus", router);
+      //   router.push({
+      //     name: "main",
+      //   });
+      // } else {
+      //   ElMessageBox.alert("账号密码错误，请重试！");
+      //   router.push({
+      //     name: "login",
+      //   });
+      // }
+    };
+
     return {
       userLoginForm,
       error,
+      getUserInfo,
     };
   },
 };
