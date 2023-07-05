@@ -5,22 +5,25 @@ export default createStore({
     collapse: true,
     storedMenus: [],
     menus: [],
-    access_token: "",
+    authorization: "",
     refresh_token: "",
     last_token_refresh_time: new Date("October 01, 1975 00:00:00"),
   },
   getters: {},
   mutations: {
     getAccessToken(state) {
-      // state.access_token = state.access_token || Cookies.get("access_token");
+      state.authorization;
+    },
+    setAccessToken(state, val) {
+      state.authorization = val;
+      // Cookies.set("refresh_token", val);
     },
     setRefreshToken(state, val) {
       state.refresh_token = val;
       // Cookies.set("refresh_token", val);
     },
     updateLastRefreshTime(state) {
-      // state.last_token_refresh_time = new Date().getTime();
-      // Cookies.set("last_token_refresh_time", state.last_token_refresh_time);
+      state.last_token_refresh_time = new Date();
     },
   },
   actions: {},

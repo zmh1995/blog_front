@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import "element-plus/theme-chalk/el-message.css";
+import element from "element-plus";
+import "element-plus/dist/index.css";
 
-createApp(App).use(store).use(router).mount("#app");
+createApp(App).use(element).use(store).use(router).mount("#app");
